@@ -3,26 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
-  <meta name="description" content="韩昊辰，学生、独立游戏开发者。">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="韩昊辰的个人主页与社交链接。">
   <title>韩昊辰</title>
   <style>
-    body { overflow-wrap:anywhere; }
+    :root { color-scheme: dark; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #09090b; color: #f4f4f5; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; overflow-wrap: anywhere; background: radial-gradient(circle at 50% -10%, rgba(113, 113, 122, .22), transparent 42%), #09090b; }
+    main { width: min(100% - 40px, 560px); padding: 64px 28px; text-align: center; }
+    h1 { margin: 0; font-size: clamp(2.25rem, 9vw, 4rem); font-weight: 700; letter-spacing: .08em; }
+    .links { display: flex; justify-content: center; gap: 14px; margin: 36px 0 0; }
+    .link { width: 54px; height: 54px; display: grid; place-items: center; color: #d4d4d8; border: 1px solid #27272a; border-radius: 16px; background: rgba(24, 24, 27, .72); transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease; }
+    .link:hover, .link:focus-visible { color: #fff; border-color: #71717a; background: #27272a; transform: translateY(-3px); outline: none; }
+    .link svg { width: 27px; height: 27px; fill: currentColor; }
+    .link .wordmark { width: auto; font-size: 15px; font-weight: 800; letter-spacing: -.04em; }
+    .link .bili { font-size: 12px; letter-spacing: -.08em; }
+    @media (max-width: 420px) { main { padding: 48px 20px; } .links { gap: 10px; } .link { width: 50px; height: 50px; border-radius: 14px; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>我是韩昊辰。</h1>
-    <p>一名学生，也是一名独立游戏开发者。</p>
-    <h2>我在做什么？</h2>
-    <p>我在学习，也在尝试把自己的想法做成游戏。</p>
-    <p>这里会记录学习、开发，以及一些还没完成的想法。</p>
-    <h2>找到我。</h2>
-    <p>你可以在 GitHub 上看看我在做什么，也欢迎写邮件来聊聊。</p>
-    <ul>
-      <li>GitHub：<a href="https://github.com/osphey">github.com/osphey</a></li>
-      <li>邮箱：<a href="mailto:osphey@163.com">osphey@163.com</a></li>
-    </ul>
+    <h1>韩昊辰</h1>
+    <nav class="links" aria-label="社交链接">
+      <a class="link" href="https://x.com/Ospheyy" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.964 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg></a>
+      <a class="link" href="https://osphey.itch.io/" target="_blank" rel="noopener noreferrer" aria-label="itch.io"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.2C4 6.43 5.43 5 7.2 5h9.6C18.57 5 20 6.43 20 8.2v7.6c0 1.77-1.43 3.2-3.2 3.2h-9.6C5.43 19 4 17.57 4 15.8V8.2Zm3.5 1.3v2h2v-2h-2Zm7 0v2h2v-2h-2ZM8 6.5 6.5 4.8a.7.7 0 0 1 1.08-.9L9 5.5h6l1.42-1.6a.7.7 0 0 1 1.08.9L16 6.5H8Z"/></svg></a>
+      <a class="link" href="https://github.com/osphey" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297a12 12 0 0 0-3.79 23.39c.6.113.82-.26.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.73.084-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.42-1.305.763-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.302-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23a11.5 11.5 0 0 1 6.006 0c2.295-1.552 3.3-1.23 3.3-1.23.645 1.653.24 2.874.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.81 1.1.81 2.22v3.293c0 .32.21.694.825.576A12 12 0 0 0 12 .297Z"/></svg></a>
+      <a class="link" href="https://space.bilibili.com/3494350312966218" target="_blank" rel="noopener noreferrer" aria-label="哔哩哔哩"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.1 5.4 6.2 3.5a.9.9 0 1 0-1.3 1.3l1.6 1.6H5.2A3.2 3.2 0 0 0 2 9.6v7.2A3.2 3.2 0 0 0 5.2 20h13.6a3.2 3.2 0 0 0 3.2-3.2V9.6a3.2 3.2 0 0 0-3.2-3.2h-1.3l1.6-1.6a.9.9 0 1 0-1.3-1.3l-1.9 1.9H8.1ZM5.2 8.2h13.6c.77 0 1.4.63 1.4 1.4v7.2c0 .77-.63 1.4-1.4 1.4H5.2c-.77 0-1.4-.63-1.4-1.4V9.6c0-.77.63-1.4 1.4-1.4Zm2.2 3.1a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm9.2 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/></svg></a>
+    </nav>
   </main>
 </body>
 </html>
