@@ -176,11 +176,39 @@
 
     .game-list {
       display: grid;
-      gap: 28px;
+      gap: 32px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
+
+    .game {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .game-image {
+      display: block;
+      overflow: hidden;
+      border: 1px solid #000;
+      line-height: 0;
+    }
+
+    .game-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 315 / 250;
+      object-fit: cover;
+      transition: opacity 140ms ease;
+    }
+
+    .game-image:hover img,
+    .game-image:focus-visible img { opacity: .78; }
+
+    .game-copy { padding-top: 1px; }
 
     .game h3 {
       margin: 0;
@@ -214,6 +242,15 @@
       margin-top: 6px;
       font-size: .82rem;
       line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .game {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .game-image { width: min(100%, 315px); }
     }
 
     @media (max-width: 480px) {
@@ -278,29 +315,54 @@
       <h2>games</h2>
       <ul class="game-list">
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-          <p class="game-description">A Sisyphus-inspired walking simulator for Brackeys Game Jam 2026.1.</p>
-          <span class="game-meta">Simulation · HTML5 · Prototype</span>
+          <a class="game-image" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer" aria-label="Open Sisyphus Without a Hill on itch.io">
+            <img src="assets/games/sisyphus-without-a-hill.png" width="315" height="250" loading="lazy" decoding="async" alt="">
+          </a>
+          <div class="game-copy">
+            <h3><a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
+            <p class="game-description">A Sisyphus-inspired walking simulator for Brackeys Game Jam 2026.1.</p>
+            <span class="game-meta">Simulation · HTML5 · Prototype</span>
+          </div>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-          <p class="game-description">An interactive fiction game for Game Jam Theme: Inflate.</p>
-          <span class="game-meta">Interactive Fiction · by lilinth</span>
+          <a class="game-image" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer" aria-label="Open TheBigGoodbye on itch.io">
+            <img src="assets/games/thebiggoodbye.png" width="315" height="250" loading="lazy" decoding="async" alt="">
+          </a>
+          <div class="game-copy">
+            <h3><a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
+            <p class="game-description">An interactive fiction game for Game Jam Theme: Inflate.</p>
+            <span class="game-meta">Interactive Fiction · by lilinth</span>
+          </div>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-          <p class="game-description">A farming-style survivor-like game for Ludum Dare 58.</p>
-          <span class="game-meta">Simulation · HTML5 / Windows · Prototype</span>
+          <a class="game-image" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer" aria-label="Open Harvest Survivors on itch.io">
+            <img src="assets/games/harvest-survivors.png" width="315" height="250" loading="lazy" decoding="async" alt="">
+          </a>
+          <div class="game-copy">
+            <h3><a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
+            <p class="game-description">A farming-style survivor-like game for Ludum Dare 58.</p>
+            <span class="game-meta">Simulation · HTML5 / Windows · Prototype</span>
+          </div>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-          <p class="game-description">A subtle meme game about a button that could change everything.</p>
-          <span class="game-meta">Interactive Fiction · Windows</span>
+          <a class="game-image" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer" aria-label="Open There is a button on itch.io">
+            <img src="assets/games/there-is-a-button.png" width="315" height="250" loading="lazy" decoding="async" alt="">
+          </a>
+          <div class="game-copy">
+            <h3><a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
+            <p class="game-description">A subtle meme game about a button that could change everything.</p>
+            <span class="game-meta">Interactive Fiction · Windows</span>
+          </div>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer">PATH&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-          <p class="game-description">A tiny puzzle game.</p>
-          <span class="game-meta">Puzzle · HTML5</span>
+          <a class="game-image" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer" aria-label="Open PATH on itch.io">
+            <img src="assets/games/path.png" width="315" height="250" loading="lazy" decoding="async" alt="">
+          </a>
+          <div class="game-copy">
+            <h3><a class="game-title" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer">PATH&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
+            <p class="game-description">A tiny puzzle game.</p>
+            <span class="game-meta">Puzzle · HTML5</span>
+          </div>
         </li>
       </ul>
     </section>
