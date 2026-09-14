@@ -133,6 +133,39 @@
 
     .section p { margin: 0; line-height: 1.5; }
 
+    .game-list {
+      display: grid;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .game-title {
+      color: #000;
+      font-size: .95rem;
+      text-decoration: none;
+    }
+
+    .game-title:hover,
+    .game-title:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      outline: none;
+    }
+
+    .game-description {
+      margin: 6px 0 0;
+      line-height: 1.5;
+    }
+
+    .game-meta {
+      display: block;
+      margin-top: 4px;
+      font-size: .8rem;
+      line-height: 1.5;
+    }
+
     @media (max-width: 420px) {
       .site-header { padding-top: 18px; }
       main { padding: 40px 20px; }
@@ -180,10 +213,35 @@
         </a>
       </nav>
     </section>
-    </section>
     <section id="games" class="section">
       <h2>games</h2>
-      <p>Coming soon.</p>
+      <ul class="game-list">
+        <li class="game">
+          <a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill</a>
+          <p class="game-description">A Sisyphus-inspired walking simulator created for Brackeys Game Jam 2026.1.</p>
+          <span class="game-meta">Simulation · HTML5 · Prototype</span>
+        </li>
+        <li class="game">
+          <a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye</a>
+          <p class="game-description">An interactive fiction game made for the Game Jam Theme: Inflate.</p>
+          <span class="game-meta">Interactive Fiction · by lilinth</span>
+        </li>
+        <li class="game">
+          <a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors</a>
+          <p class="game-description">A farming-style survivor-like game made for Ludum Dare 58.</p>
+          <span class="game-meta">Simulation · HTML5 / Windows · Prototype</span>
+        </li>
+        <li class="game">
+          <a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button</a>
+          <p class="game-description">A subtle meme game built around one question: what if pressing a button could change everything?</p>
+          <span class="game-meta">Interactive Fiction · Windows</span>
+        </li>
+        <li class="game">
+          <a class="game-title" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer">PATH</a>
+          <p class="game-description">A tiny puzzle game.</p>
+          <span class="game-meta">Puzzle · HTML5</span>
+        </li>
+      </ul>
     </section>
     <section id="projects" class="section">
       <h2>projects</h2>
