@@ -53,6 +53,8 @@
     .site-nav a {
       color: #000;
       text-decoration: none;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
     }
 
     .site-name { font-size: .95rem; white-space: nowrap; }
@@ -72,14 +74,16 @@
 
     .site-name:hover,
     .site-nav a:hover,
-    .game-title:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
+    .game-title:hover,
+    .site-name:focus-visible,
+    .site-nav a:focus-visible,
+    .game-title:focus-visible {
+      text-decoration-line: underline;
     }
 
     a:focus-visible {
-      outline: 2px solid currentColor;
-      outline-offset: 5px;
+      outline: 1px solid #000;
+      outline-offset: 4px;
     }
 
     h1 {
@@ -123,6 +127,12 @@
       text-decoration: none;
     }
 
+    .link:hover,
+    .link:focus-visible {
+      color: #fff;
+      background: #000;
+    }
+
     .link svg {
       display: block;
       width: 24px;
@@ -151,16 +161,14 @@
     section { scroll-margin-top: 104px; }
 
     .section {
-      margin-top: 56px;
+      margin-top: 64px;
     }
 
     .section h2 {
-      margin: 0 0 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid currentColor;
+      margin: 0 0 20px;
       font-size: .9rem;
       line-height: 1.5;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: .02em;
     }
 
@@ -182,10 +190,18 @@
     }
 
     .game-title {
+      display: inline-block;
+      padding-block: 2px;
       color: #000;
-      text-decoration: underline;
+      text-decoration: none;
       text-decoration-thickness: 1px;
       text-underline-offset: 4px;
+    }
+
+    .external-mark {
+      display: inline-block;
+      margin-left: .25em;
+      font-size: .85em;
     }
 
     .game-description {
@@ -208,7 +224,8 @@
         padding-bottom: 8px;
       }
       main { padding-top: 36px; padding-bottom: 56px; }
-      .section { margin-top: 44px; }
+      section { scroll-margin-top: 128px; }
+      .section { margin-top: 48px; }
       .game-list { gap: 26px; }
     }
   </style>
@@ -261,27 +278,27 @@
       <h2>games</h2>
       <ul class="game-list">
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill</a></h3>
+          <h3><a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
           <p class="game-description">A Sisyphus-inspired walking simulator for Brackeys Game Jam 2026.1.</p>
           <span class="game-meta">Simulation · HTML5 · Prototype</span>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye</a></h3>
+          <h3><a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
           <p class="game-description">An interactive fiction game for Game Jam Theme: Inflate.</p>
           <span class="game-meta">Interactive Fiction · by lilinth</span>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors</a></h3>
+          <h3><a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
           <p class="game-description">A farming-style survivor-like game for Ludum Dare 58.</p>
           <span class="game-meta">Simulation · HTML5 / Windows · Prototype</span>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button</a></h3>
+          <h3><a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
           <p class="game-description">A subtle meme game about a button that could change everything.</p>
           <span class="game-meta">Interactive Fiction · Windows</span>
         </li>
         <li class="game">
-          <h3><a class="game-title" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer">PATH</a></h3>
+          <h3><a class="game-title" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer">PATH&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
           <p class="game-description">A tiny puzzle game.</p>
           <span class="game-meta">Puzzle · HTML5</span>
         </li>
