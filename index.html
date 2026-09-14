@@ -12,6 +12,8 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "PingFang SC", "Microsoft YaHei", monospace;
       background: #fff;
       color: #000;
+      --content-width: 760px;
+      --page-gutter: clamp(20px, 4vw, 48px);
     }
 
     * { box-sizing: border-box; }
@@ -24,18 +26,19 @@
     }
 
     main {
-      width: min(100%, 560px);
+      width: min(100%, var(--content-width));
       margin: 0;
-      padding: 56px 20px;
+      padding: 52px var(--page-gutter) 72px;
     }
 
     .site-header {
-      width: min(100%, 560px);
-      padding: 22px 20px 0;
+      width: min(100%, var(--content-width));
+      padding: 22px var(--page-gutter) 16px;
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 24px;
+      border-bottom: 1px solid #000;
     }
 
     .site-name,
@@ -117,7 +120,7 @@
       outline-offset: 4px;
     }
 
-    .intro { max-width: 48ch; margin: 20px 0 0; line-height: 1.5; }
+    .intro { max-width: 64ch; margin: 20px 0 0; line-height: 1.5; }
 
     .section {
       margin-top: 64px;
@@ -168,8 +171,12 @@
 
     @media (max-width: 420px) {
       .site-header { padding-top: 18px; }
-      main { padding: 40px 20px; }
+      main { padding: 40px 20px 56px; }
       .links { gap: 16px; }
+    }
+
+    @media (min-width: 720px) {
+      .education { white-space: nowrap; }
     }
   </style>
 </head>
@@ -186,7 +193,7 @@
     <section id="about" class="about">
       <h1>Han Haochen</h1>
       <p class="intro">I'm an independent game developer interested in turning ideas into playable experiences through code, interaction, and visual expression.</p>
-      <p class="education">Zhejiang University of Media and Communications · 2022-2026 · Bachelor of Engineering</p>
+      <p class="education">Zhejiang University of Media and Communications · B.Eng. · 2022–2026</p>
       <nav class="links" aria-label="Social links">
         <a class="link" href="https://x.com/Ospheyy" target="_blank" rel="noopener noreferrer" aria-label="X" title="X">
           <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -218,22 +225,22 @@
       <ul class="game-list">
         <li class="game">
           <a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill</a>
-          <p class="game-description">A Sisyphus-inspired walking simulator created for Brackeys Game Jam 2026.1.</p>
+          <p class="game-description">A Sisyphus-inspired walking simulator for Brackeys Game Jam 2026.1.</p>
           <span class="game-meta">Simulation · HTML5 · Prototype</span>
         </li>
         <li class="game">
           <a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye</a>
-          <p class="game-description">An interactive fiction game made for the Game Jam Theme: Inflate.</p>
+          <p class="game-description">An interactive fiction game for Game Jam Theme: Inflate.</p>
           <span class="game-meta">Interactive Fiction · by lilinth</span>
         </li>
         <li class="game">
           <a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors</a>
-          <p class="game-description">A farming-style survivor-like game made for Ludum Dare 58.</p>
+          <p class="game-description">A farming-style survivor-like game for Ludum Dare 58.</p>
           <span class="game-meta">Simulation · HTML5 / Windows · Prototype</span>
         </li>
         <li class="game">
           <a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button</a>
-          <p class="game-description">A subtle meme game built around one question: what if pressing a button could change everything?</p>
+          <p class="game-description">A subtle meme game about a button that could change everything.</p>
           <span class="game-meta">Interactive Fiction · Windows</span>
         </li>
         <li class="game">
