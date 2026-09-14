@@ -14,7 +14,7 @@
       line-height: 1.65;
       background: #fff;
       color: #000;
-      --content-width: 800px;
+      --content-width: 1180px;
       --page-gutter: clamp(20px, 4vw, 40px);
     }
 
@@ -155,6 +155,7 @@
 
     .intro {
       margin: 20px 0 0;
+      max-width: 760px;
       line-height: 1.75;
     }
 
@@ -176,17 +177,18 @@
 
     .game-list {
       display: grid;
-      gap: 32px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px 24px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
     .game {
-      display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
-      gap: 20px;
-      align-items: start;
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .game-image {
@@ -208,7 +210,7 @@
     .game-image:hover img,
     .game-image:focus-visible img { opacity: .78; }
 
-    .game-copy { padding-top: 1px; }
+    .game-copy { min-width: 0; }
 
     .game h3 {
       margin: 0;
@@ -244,13 +246,12 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 600px) {
-      .game {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
+    @media (max-width: 860px) {
+      .game-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
 
-      .game-image { width: min(100%, 315px); }
+    @media (max-width: 600px) {
+      .game-list { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
