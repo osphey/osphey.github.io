@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Haochen Han — independent game developer.">
-  <title>Haochen Han</title>
+  <meta name="description" content="Haochen Han — independent game developer." data-zh-content="韩昊辰 Osphey — 独立游戏开发者。">
+  <title data-zh="韩昊辰 · Osphey">Haochen Han</title>
   <style>
     :root {
       color-scheme: light;
@@ -29,17 +29,17 @@
     main {
       width: 100%;
       margin: 0;
-      padding: 56px var(--page-gutter) 88px;
+      padding: clamp(40px, 5vw, 80px) var(--page-gutter) 80px;
     }
 
     .site-header {
       margin-inline: var(--page-gutter);
-      padding: 20px 0 12px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 4px 28px;
+      padding: 16px 0 12px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      grid-template-areas: "name navigation language";
+      align-items: center;
+      gap: 4px 32px;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -55,9 +55,10 @@
       text-underline-offset: 4px;
     }
 
-    .site-name { font-size: .95rem; white-space: nowrap; }
+    .site-name { grid-area: name; justify-self: start; font-size: .95rem; white-space: nowrap; }
 
     .site-nav {
+      grid-area: navigation;
       display: flex;
       gap: 24px;
       font-size: .9rem;
@@ -70,6 +71,27 @@
       white-space: nowrap;
     }
 
+    .language-toggle {
+      grid-area: language;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 56px;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid #000;
+      border-radius: 0;
+      color: #000;
+      background: #fff;
+      font: inherit;
+      font-size: .85rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .language-toggle[hidden] { display: none; }
+    .language-toggle:hover { color: #fff; background: #000; }
+
     .site-name:hover,
     .site-nav a:hover,
     .game-title:hover,
@@ -79,18 +101,29 @@
       text-decoration-line: underline;
     }
 
-    a:focus-visible {
+    a:focus-visible,
+    button:focus-visible {
       outline: 1px solid #000;
       outline-offset: 4px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2rem, 4vw, 2.4rem);
+      font-size: clamp(2rem, 3vw, 2.65rem);
       line-height: 1.2;
       font-weight: 400;
       letter-spacing: -.04em;
     }
+
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr) minmax(0, 1fr);
+      grid-template-areas: "identity introduction education";
+      gap: 32px clamp(28px, 4vw, 72px);
+      align-items: start;
+    }
+
+    .identity { grid-area: identity; min-width: 0; }
 
     .handle {
       margin: 8px 0 0;
@@ -98,9 +131,19 @@
     }
 
     .education {
-      margin: 24px 0 0;
+      grid-area: education;
+      margin: 0;
       font-size: .9rem;
     }
+
+    .education h2 {
+      margin: 0 0 12px;
+      font-size: .85rem;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .education p { margin: 0; }
 
     .education-school,
     .education-details { display: block; }
@@ -111,7 +154,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      margin: 24px 0 0;
+      margin: 20px 0 0;
     }
 
     .link {
@@ -152,22 +195,27 @@
     }
 
     .intro {
-      margin: 20px 0 0;
-      max-width: 760px;
-      line-height: 1.75;
+      grid-area: introduction;
+      margin: 0;
+      max-width: 62ch;
+      line-height: 1.85;
     }
+
+    :lang(zh-CN) h1 { letter-spacing: .04em; }
+    :lang(zh-CN) .intro,
+    :lang(zh-CN) .game-description { line-height: 1.95; }
 
     section { scroll-margin-top: 104px; }
 
     .section {
-      margin-top: 64px;
+      margin-top: clamp(52px, 5vw, 80px);
     }
 
     .section h2 {
-      margin: 0 0 20px;
+      margin: 0 0 24px;
       font-size: .9rem;
       line-height: 1.5;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: .02em;
     }
 
@@ -176,7 +224,7 @@
     .game-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-      gap: 40px clamp(20px, 2vw, 40px);
+      gap: 48px clamp(24px, 2vw, 40px);
       margin: 0;
       padding: 0;
       list-style: none;
@@ -186,7 +234,7 @@
       display: flex;
       min-width: 0;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
     .game-image {
@@ -208,11 +256,17 @@
     .game-image:hover img,
     .game-image:focus-visible img { opacity: .78; }
 
-    .game-copy { min-width: 0; }
+    .game-copy {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+    }
 
     .game h3 {
       margin: 0;
-      font-size: 1.05rem;
+      font-size: 1rem;
       line-height: 1.5;
       font-weight: 500;
     }
@@ -233,134 +287,204 @@
     }
 
     .game-description {
-      margin: 8px 0 0;
-      font-size: .95rem;
+      margin: 8px 0 14px;
+      font-size: .93rem;
+      line-height: 1.8;
     }
 
     .game-meta {
       display: block;
-      margin-top: 6px;
+      margin-top: auto;
       font-size: .82rem;
       line-height: 1.5;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 1100px) {
+      .about {
+        grid-template-columns: minmax(230px, .85fr) minmax(0, 1.15fr);
+        grid-template-areas: "identity introduction" "identity education";
+        row-gap: 28px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .about {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "identity" "introduction" "education";
+      }
+    }
+
+    @media (max-width: 640px) {
       .site-header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 20px;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "name language" "navigation navigation";
+        padding-top: 12px;
         padding-bottom: 8px;
       }
-      main { padding-top: 36px; padding-bottom: 56px; }
+      .site-nav { justify-self: start; }
+      main { padding-top: 36px; padding-bottom: 60px; }
       section { scroll-margin-top: 128px; }
       .section { margin-top: 48px; }
-      .game-list { gap: 26px; }
+      .game-list { row-gap: 36px; }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <a class="site-name" href="#about">Haochen Han</a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="#about">about</a>
-      <a href="#games">games</a>
-      <a href="#projects">projects</a>
+    <a class="site-name" href="#about" data-zh="韩昊辰">Haochen Han</a>
+    <nav class="site-nav" aria-label="Main navigation" data-zh-label="主导航">
+      <a href="#about" data-zh="关于">about</a>
+      <a href="#games" data-zh="游戏">games</a>
+      <a href="#projects" data-zh="项目">projects</a>
     </nav>
+    <button class="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-CN" hidden>中文</button>
   </header>
   <main>
     <section id="about" class="about">
-      <h1>Haochen Han</h1>
-      <p class="handle">@Osphey</p>
-      <p class="intro">I'm an independent game developer interested in turning ideas into playable experiences through code, interaction, and visual expression.</p>
-      <p class="education">
-        <span class="education-school">Zhejiang University of Media and Communications</span>
-        <span class="education-details">B.Eng. · 2022–2026</span>
-      </p>
-      <nav class="links" aria-label="Social links">
-        <a class="link" href="https://x.com/Ospheyy" target="_blank" rel="noopener noreferrer" aria-label="X" title="X">
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M4 4l11.733 16h4.267L8.267 4z" />
-            <path d="M4 20l6.768-6.768m2.46-2.46L20 4" />
-          </svg>
-        </a>
-        <a class="link" href="https://osphey.itch.io/" target="_blank" rel="noopener noreferrer" aria-label="itch.io" title="itch.io">
-          <!-- Original path and aspect ratio: https://itch.io/press-kit -->
-          <svg class="icon-itch" width="24" height="24" viewBox="0 0 245.371 220.736" aria-hidden="true" focusable="false">
-            <path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z" />
-          </svg>
-        </a>
-        <a class="link" href="https://github.com/osphey" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-          </svg>
-        </a>
-        <a class="link" href="https://space.bilibili.com/3494350312966218" target="_blank" rel="noopener noreferrer" aria-label="Bilibili" title="Bilibili">
-          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6" />
-            <path d="M8 3l2 3M16 3l-2 3M9 13v-2M15 11v2" />
-          </svg>
-        </a>
-      </nav>
+      <div class="identity">
+        <h1 data-zh="韩昊辰">Haochen Han</h1>
+        <p class="handle">@Osphey</p>
+        <nav class="links" aria-label="Social links" data-zh-label="社交平台">
+          <a class="link" href="https://x.com/Ospheyy" target="_blank" rel="noopener noreferrer" aria-label="X" title="X">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 4l11.733 16h4.267L8.267 4z" />
+              <path d="M4 20l6.768-6.768m2.46-2.46L20 4" />
+            </svg>
+          </a>
+          <a class="link" href="https://osphey.itch.io/" target="_blank" rel="noopener noreferrer" aria-label="itch.io" title="itch.io">
+            <!-- Original path and aspect ratio: https://itch.io/press-kit -->
+            <svg class="icon-itch" width="24" height="24" viewBox="0 0 245.371 220.736" aria-hidden="true" focusable="false">
+              <path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z" />
+            </svg>
+          </a>
+          <a class="link" href="https://github.com/osphey" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+            </svg>
+          </a>
+          <a class="link" href="https://space.bilibili.com/3494350312966218" target="_blank" rel="noopener noreferrer" aria-label="Bilibili" title="Bilibili" data-zh-label="哔哩哔哩" data-zh-title="哔哩哔哩">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6" />
+              <path d="M8 3l2 3M16 3l-2 3M9 13v-2M15 11v2" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+      <p class="intro" data-zh="我是一名独立游戏开发者，喜欢用代码、交互和视觉表达，把想法变成可以亲手体验的游戏。">I'm an independent game developer interested in turning ideas into playable experiences through code, interaction, and visual expression.</p>
+      <div class="education">
+        <h2 data-zh="学业经历">education</h2>
+        <p>
+          <span class="education-school" data-zh="浙江传媒学院">Zhejiang University of Media and Communications</span>
+          <span class="education-details" data-zh="工学学士 · 2022–2026">B.Eng. · 2022–2026</span>
+        </p>
+      </div>
     </section>
     <section id="games" class="section">
-      <h2>games</h2>
+      <h2 data-zh="游戏">games</h2>
       <ul class="game-list">
         <li class="game">
-          <a class="game-image" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer" aria-label="Open Sisyphus Without a Hill on itch.io">
+          <a class="game-image" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer" aria-label="Open Sisyphus Without a Hill on itch.io" data-zh-label="在 itch.io 打开 Sisyphus Without a Hill">
             <img src="assets/games/sisyphus-without-a-hill.png" width="315" height="250" loading="lazy" decoding="async" alt="">
           </a>
           <div class="game-copy">
             <h3><a class="game-title" href="https://osphey.itch.io/sisyphus-without-a-hill" target="_blank" rel="noopener noreferrer">Sisyphus Without a Hill&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-            <p class="game-description">A Sisyphus-inspired walking simulator for Brackeys Game Jam 2026.1.</p>
-            <span class="game-meta">Simulation · HTML5 · Prototype</span>
+            <p class="game-description" data-zh="以西西弗斯为灵感的步行模拟游戏，为 Brackeys Game Jam 2026.1 创作。">A Sisyphus-inspired walking simulator for Brackeys Game Jam 2026.1.</p>
+            <span class="game-meta" data-zh="模拟 · 网页端 · 原型">Simulation · HTML5 · Prototype</span>
           </div>
         </li>
         <li class="game">
-          <a class="game-image" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer" aria-label="Open TheBigGoodbye on itch.io">
+          <a class="game-image" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer" aria-label="Open TheBigGoodbye on itch.io" data-zh-label="在 itch.io 打开 TheBigGoodbye">
             <img src="assets/games/thebiggoodbye.png" width="315" height="250" loading="lazy" decoding="async" alt="">
           </a>
           <div class="game-copy">
             <h3><a class="game-title" href="https://lilinth.itch.io/thebiggoodbye" target="_blank" rel="noopener noreferrer">TheBigGoodbye&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-            <p class="game-description">An interactive fiction game for Game Jam Theme: Inflate.</p>
-            <span class="game-meta">Interactive Fiction · by lilinth</span>
+            <p class="game-description" data-zh="为「膨胀（Inflate）」主题 Game Jam 创作的互动叙事游戏。">An interactive fiction game for Game Jam Theme: Inflate.</p>
+            <span class="game-meta" data-zh="互动叙事 · 作者：lilinth">Interactive Fiction · by lilinth</span>
           </div>
         </li>
         <li class="game">
-          <a class="game-image" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer" aria-label="Open Harvest Survivors on itch.io">
+          <a class="game-image" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer" aria-label="Open Harvest Survivors on itch.io" data-zh-label="在 itch.io 打开 Harvest Survivors">
             <img src="assets/games/harvest-survivors.png" width="315" height="250" loading="lazy" decoding="async" alt="">
           </a>
           <div class="game-copy">
             <h3><a class="game-title" href="https://osphey.itch.io/harvest-survivors" target="_blank" rel="noopener noreferrer">Harvest Survivors&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-            <p class="game-description">A farming-style survivor-like game for Ludum Dare 58.</p>
-            <span class="game-meta">Simulation · HTML5 / Windows · Prototype</span>
+            <p class="game-description" data-zh="结合农场元素的类幸存者游戏，为 Ludum Dare 58 创作。">A farming-style survivor-like game for Ludum Dare 58.</p>
+            <span class="game-meta" data-zh="模拟 · 网页端 / Windows · 原型">Simulation · HTML5 / Windows · Prototype</span>
           </div>
         </li>
         <li class="game">
-          <a class="game-image" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer" aria-label="Open There is a button on itch.io">
+          <a class="game-image" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer" aria-label="Open There is a button on itch.io" data-zh-label="在 itch.io 打开 There is a button">
             <img src="assets/games/there-is-a-button.png" width="315" height="250" loading="lazy" decoding="async" alt="">
           </a>
           <div class="game-copy">
             <h3><a class="game-title" href="https://osphey.itch.io/there-is-a-button" target="_blank" rel="noopener noreferrer">There is a button&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-            <p class="game-description">A subtle meme game about a button that could change everything.</p>
-            <span class="game-meta">Interactive Fiction · Windows</span>
+            <p class="game-description" data-zh="一个带点玩梗意味的小游戏，围绕一颗可能改变一切的按钮展开。">A subtle meme game about a button that could change everything.</p>
+            <span class="game-meta" data-zh="互动叙事 · Windows">Interactive Fiction · Windows</span>
           </div>
         </li>
         <li class="game">
-          <a class="game-image" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer" aria-label="Open PATH on itch.io">
+          <a class="game-image" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer" aria-label="Open PATH on itch.io" data-zh-label="在 itch.io 打开 PATH">
             <img src="assets/games/path.png" width="315" height="250" loading="lazy" decoding="async" alt="">
           </a>
           <div class="game-copy">
             <h3><a class="game-title" href="https://osphey.itch.io/path" target="_blank" rel="noopener noreferrer">PATH&nbsp;<span class="external-mark" aria-hidden="true">↗</span></a></h3>
-            <p class="game-description">A tiny puzzle game.</p>
-            <span class="game-meta">Puzzle · HTML5</span>
+            <p class="game-description" data-zh="一个小巧的解谜游戏。">A tiny puzzle game.</p>
+            <span class="game-meta" data-zh="解谜 · 网页端">Puzzle · HTML5</span>
           </div>
         </li>
       </ul>
     </section>
     <section id="projects" class="section">
-      <h2>projects</h2>
-      <p>Coming soon.</p>
+      <h2 data-zh="项目">projects</h2>
+      <p data-zh="敬请期待。">Coming soon.</p>
     </section>
   </main>
+  <script>
+    (() => {
+      const toggle = document.querySelector('.language-toggle');
+      const storageKey = 'osphey-language';
+      const texts = [...document.querySelectorAll('[data-zh]')].map(element => ({
+        element,
+        en: element.textContent,
+        zh: element.dataset.zh
+      }));
+      const attributes = [
+        ['aria-label', 'data-zh-label'],
+        ['title', 'data-zh-title'],
+        ['content', 'data-zh-content']
+      ].flatMap(([attribute, translation]) =>
+        [...document.querySelectorAll(`[${translation}]`)].map(element => ({
+          element,
+          attribute,
+          en: element.getAttribute(attribute),
+          zh: element.getAttribute(translation)
+        }))
+      );
+
+      let language = 'en';
+
+      function setLanguage(next) {
+        language = next === 'zh' ? 'zh' : 'en';
+        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+        texts.forEach(item => { item.element.textContent = item[language]; });
+        attributes.forEach(item => { item.element.setAttribute(item.attribute, item[language]); });
+        toggle.textContent = language === 'zh' ? 'EN' : '中文';
+        toggle.lang = language === 'zh' ? 'en' : 'zh-CN';
+        toggle.setAttribute('aria-label', language === 'zh' ? '切换至英文' : 'Switch to Chinese');
+      }
+
+      // Storage may be unavailable in private browsing; switching still works.
+      try {
+        language = localStorage.getItem(storageKey) === 'zh' ? 'zh' : 'en';
+      } catch {}
+
+      setLanguage(language);
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        setLanguage(language === 'en' ? 'zh' : 'en');
+        try { localStorage.setItem(storageKey, language); } catch {}
+      });
+    })();
+  </script>
 </body>
 </html>
