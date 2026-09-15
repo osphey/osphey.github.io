@@ -3,19 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="Haochen Han — independent game developer." data-zh-content="韩昊辰 Osphey — 独立游戏开发者。">
   <title data-zh="韩昊辰 · Osphey">Haochen Han</title>
+  <script>
+    (() => {
+      let saved;
+      try { saved = localStorage.getItem('osphey-theme'); } catch {}
+      document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
+    })();
+  </script>
   <style>
     :root {
       color-scheme: light;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "PingFang SC", "Microsoft YaHei", monospace;
       font-size: 15px;
       line-height: 1.65;
-      background: #fff;
-      color: #000;
+      --background: #fff;
+      --foreground: #000;
+      background: var(--background);
+      color: var(--foreground);
       --content-width: 720px;
       --page-gutter: clamp(24px, 5vw, 48px);
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --background: #101010;
+      --foreground: #f4f4f4;
     }
 
     * { box-sizing: border-box; }
@@ -24,7 +39,7 @@
       min-height: 100vh;
       margin: 0;
       overflow-wrap: anywhere;
-      background: #fff;
+      background: var(--background);
     }
 
     main,
@@ -41,19 +56,19 @@
       padding: 16px 0 12px;
       display: grid;
       grid-template-columns: 1fr auto auto;
-      grid-template-areas: "name navigation language";
+      grid-template-areas: "name navigation actions";
       align-items: center;
       gap: 4px 32px;
       position: sticky;
       top: 0;
       z-index: 10;
-      background: #fff;
-      border-bottom: 1px solid #000;
+      background: var(--background);
+      border-bottom: 1px solid var(--foreground);
     }
 
     .site-name,
     .site-nav a {
-      color: #000;
+      color: var(--foreground);
       text-decoration: none;
       text-decoration-thickness: 1px;
       text-underline-offset: 4px;
@@ -75,26 +90,38 @@
       white-space: nowrap;
     }
 
-    .language-toggle {
-      grid-area: language;
+    .header-actions {
+      grid-area: actions;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .language-toggle,
+    .theme-toggle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-width: 56px;
       min-height: 44px;
       padding: 0 12px;
-      border: 1px solid #000;
+      border: 1px solid var(--foreground);
       border-radius: 0;
-      color: #000;
-      background: #fff;
+      color: var(--foreground);
+      background: var(--background);
       font: inherit;
       font-size: .85rem;
       line-height: 1;
       cursor: pointer;
     }
 
-    .language-toggle[hidden] { display: none; }
-    .language-toggle:hover { color: #fff; background: #000; }
+    .theme-toggle { width: 44px; min-width: 44px; padding: 0; }
+    .theme-toggle svg { display: block; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-toggle svg[hidden],
+    .language-toggle[hidden],
+    .theme-toggle[hidden] { display: none; }
+    .language-toggle:hover,
+    .theme-toggle:hover { color: var(--background); background: var(--foreground); }
 
     .site-name:hover,
     .site-nav a:hover,
@@ -107,7 +134,7 @@
 
     a:focus-visible,
     button:focus-visible {
-      outline: 1px solid #000;
+      outline: 1px solid var(--foreground);
       outline-offset: 4px;
     }
 
@@ -169,7 +196,7 @@
       width: 44px;
       height: 44px;
       position: relative;
-      color: #000;
+      color: var(--foreground);
       text-decoration: none;
       transition: color 130ms ease;
     }
@@ -179,7 +206,7 @@
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background: #000;
+      background: var(--foreground);
       transform: scale(0);
       transition: transform 220ms ease-out;
       pointer-events: none;
@@ -187,7 +214,7 @@
 
     .link:hover,
     .link:focus-visible {
-      color: #fff;
+      color: var(--background);
       transition-delay: 50ms;
     }
 
@@ -268,7 +295,7 @@
     .game-image {
       display: block;
       overflow: hidden;
-      border: 1px solid #000;
+      border: 1px solid var(--foreground);
       line-height: 0;
     }
 
@@ -302,7 +329,7 @@
     .game-title {
       display: inline-block;
       padding-block: 2px;
-      color: #000;
+      color: var(--foreground);
       text-decoration: none;
       text-decoration-thickness: 1px;
       text-underline-offset: 4px;
@@ -330,7 +357,7 @@
     @media (max-width: 640px) {
       .site-header {
         grid-template-columns: 1fr auto;
-        grid-template-areas: "name language" "navigation navigation";
+        grid-template-areas: "name actions" "navigation navigation";
         padding-top: 12px;
         padding-bottom: 8px;
       }
@@ -350,7 +377,13 @@
       <a href="#games" data-zh="游戏">games</a>
       <a href="#projects" data-zh="项目">projects</a>
     </nav>
-    <button class="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-CN" hidden>中文</button>
+    <div class="header-actions">
+      <button class="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-CN" hidden>中文</button>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false" hidden>
+        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z" /></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" hidden><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
+      </button>
+    </div>
   </header>
   <main>
     <section id="about" class="about">
@@ -455,7 +488,11 @@
   <script>
     (() => {
       const toggle = document.querySelector('.language-toggle');
+      const themeToggle = document.querySelector('.theme-toggle');
+      const moonIcon = themeToggle.querySelector('.moon-icon');
+      const sunIcon = themeToggle.querySelector('.sun-icon');
       const storageKey = 'osphey-language';
+      const themeStorageKey = 'osphey-theme';
       const texts = [...document.querySelectorAll('[data-zh]')].map(element => ({
         element,
         en: element.textContent,
@@ -475,6 +512,24 @@
       );
 
       let language = 'en';
+      let theme = document.documentElement.dataset.theme;
+
+      function updateThemeToggle() {
+        const label = language === 'zh'
+          ? (theme === 'dark' ? '切换至浅色模式' : '切换至深色模式')
+          : (theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.setAttribute('aria-label', label);
+        themeToggle.title = label;
+        moonIcon.toggleAttribute('hidden', theme === 'dark');
+        sunIcon.toggleAttribute('hidden', theme !== 'dark');
+      }
+
+      function setTheme(next) {
+        theme = next === 'dark' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+        themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+        updateThemeToggle();
+      }
 
       function setLanguage(next) {
         language = next === 'zh' ? 'zh' : 'en';
@@ -484,6 +539,7 @@
         toggle.textContent = language === 'zh' ? 'EN' : '中文';
         toggle.lang = language === 'zh' ? 'en' : 'zh-CN';
         toggle.setAttribute('aria-label', language === 'zh' ? '切换至英文' : 'Switch to Chinese');
+        updateThemeToggle();
       }
 
       // Storage may be unavailable in private browsing; switching still works.
@@ -492,10 +548,16 @@
       } catch {}
 
       setLanguage(language);
+      setTheme(theme);
       toggle.hidden = false;
+      themeToggle.hidden = false;
       toggle.addEventListener('click', () => {
         setLanguage(language === 'en' ? 'zh' : 'en');
         try { localStorage.setItem(storageKey, language); } catch {}
+      });
+      themeToggle.addEventListener('click', () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+        try { localStorage.setItem(themeStorageKey, theme); } catch {}
       });
     })();
   </script>
