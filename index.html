@@ -168,14 +168,39 @@
       flex: 0 0 44px;
       width: 44px;
       height: 44px;
+      position: relative;
       color: #000;
       text-decoration: none;
+      transition: color 130ms ease;
+    }
+
+    .link::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #000;
+      transform: scale(0);
+      transition: transform 220ms ease-out;
+      pointer-events: none;
+    }
+
+    .link:hover,
+    .link:focus-visible {
+      color: #fff;
+      transition-delay: 50ms;
+    }
+
+    .link:hover::before,
+    .link:focus-visible::before {
+      transform: scale(1);
     }
 
     .link svg {
       display: block;
       width: 24px;
       height: 24px;
+      position: relative;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
@@ -188,6 +213,8 @@
     .link:focus-visible svg { transform: rotate(8deg); }
 
     @media (prefers-reduced-motion: reduce) {
+      .link,
+      .link::before,
       .link svg { transition: none; }
     }
 
