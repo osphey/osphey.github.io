@@ -14,7 +14,7 @@
       line-height: 1.65;
       background: #fff;
       color: #000;
-      --page-gutter: clamp(20px, 3vw, 72px);
+      --page-gutter: clamp(24px, 4vw, 104px);
     }
 
     * { box-sizing: border-box; }
@@ -29,7 +29,7 @@
     main {
       width: 100%;
       margin: 0;
-      padding: clamp(40px, 5vw, 80px) var(--page-gutter) 80px;
+      padding: clamp(48px, 5.5vw, 88px) var(--page-gutter) 88px;
     }
 
     .site-header {
@@ -119,14 +119,14 @@
       display: grid;
       grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr) minmax(0, 1fr);
       grid-template-areas: "identity introduction education";
-      gap: 32px clamp(28px, 4vw, 72px);
+      gap: 40px clamp(36px, 4.5vw, 88px);
       align-items: start;
     }
 
     .identity { grid-area: identity; min-width: 0; }
 
     .handle {
-      margin: 8px 0 0;
+      margin: 12px 0 0;
       font-size: .9rem;
     }
 
@@ -137,7 +137,7 @@
     }
 
     .education h2 {
-      margin: 0 0 12px;
+      margin: 0 0 16px;
       font-size: .85rem;
       line-height: 1.65;
       font-weight: 400;
@@ -148,13 +148,13 @@
     .education-school,
     .education-details { display: block; }
 
-    .education-details { margin-top: 4px; font-size: .85rem; }
+    .education-details { margin-top: 8px; font-size: .85rem; }
 
     .links {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin: 20px 0 0;
+      gap: 18px;
+      margin: 28px 0 0;
     }
 
     .link {
@@ -198,21 +198,21 @@
       grid-area: introduction;
       margin: 0;
       max-width: 62ch;
-      line-height: 1.85;
+      line-height: 1.9;
     }
 
     :lang(zh-CN) h1 { letter-spacing: .04em; }
     :lang(zh-CN) .intro,
-    :lang(zh-CN) .game-description { line-height: 1.95; }
+    :lang(zh-CN) .game-description { line-height: 2.05; }
 
     section { scroll-margin-top: 104px; }
 
     .section {
-      margin-top: clamp(52px, 5vw, 80px);
+      margin-top: clamp(64px, 6vw, 96px);
     }
 
     .section h2 {
-      margin: 0 0 24px;
+      margin: 0 0 28px;
       font-size: .9rem;
       line-height: 1.5;
       font-weight: 600;
@@ -224,7 +224,7 @@
     .game-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-      gap: 48px clamp(24px, 2vw, 40px);
+      gap: clamp(48px, 4vw, 72px) clamp(28px, 2.2vw, 48px);
       margin: 0;
       padding: 0;
       list-style: none;
@@ -234,7 +234,7 @@
       display: flex;
       min-width: 0;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
 
     .game-image {
@@ -287,9 +287,9 @@
     }
 
     .game-description {
-      margin: 8px 0 14px;
+      margin: 10px 0 18px;
       font-size: .93rem;
-      line-height: 1.8;
+      line-height: 1.85;
     }
 
     .game-meta {
@@ -303,7 +303,7 @@
       .about {
         grid-template-columns: minmax(230px, .85fr) minmax(0, 1.15fr);
         grid-template-areas: "identity introduction" "identity education";
-        row-gap: 28px;
+        row-gap: 36px;
       }
     }
 
@@ -322,10 +322,10 @@
         padding-bottom: 8px;
       }
       .site-nav { justify-self: start; }
-      main { padding-top: 36px; padding-bottom: 60px; }
+      main { padding-top: 40px; padding-bottom: 64px; }
       section { scroll-margin-top: 128px; }
-      .section { margin-top: 48px; }
-      .game-list { row-gap: 36px; }
+      .section { margin-top: 56px; }
+      .game-list { row-gap: 44px; }
     }
   </style>
 </head>
