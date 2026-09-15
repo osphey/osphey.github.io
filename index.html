@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Haochen Han — independent game developer." data-zh-content="韩昊辰 Osphey — 独立游戏开发者。">
+  <meta name="description" content="Haochen Han — independent game developer." data-zh-content="韩昊辰 Osphey — 独立游戏开发者。" data-ai-content="Haochen Han · Osphey — exploring AI and creative tools." data-zh-ai-content="韩昊辰 Osphey — 探索 AI 与创意工具。">
   <title data-zh="韩昊辰 · Osphey">Haochen Han</title>
   <script>
     (() => {
       let saved;
       try { saved = localStorage.getItem('osphey-theme'); } catch {}
       document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
+      document.documentElement.dataset.version = new URLSearchParams(location.search).get('view') === 'ai' ? 'ai' : 'games';
     })();
   </script>
   <style>
@@ -52,13 +53,18 @@
       padding: clamp(48px, 5.5vw, 88px) 0 88px;
     }
 
+    :root[data-version="ai"] .game-nav,
+    :root:not([data-version="ai"]) .ai-nav,
+    :root[data-version="ai"] .game-main,
+    :root:not([data-version="ai"]) .ai-main { display: none; }
+
     .site-header {
       padding: 16px 0 12px;
       display: grid;
-      grid-template-columns: 1fr auto auto;
-      grid-template-areas: "name navigation actions";
+      grid-template-columns: 1fr auto auto auto;
+      grid-template-areas: "name navigation version actions";
       align-items: center;
-      gap: 4px 32px;
+      gap: 4px 20px;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -97,6 +103,7 @@
       gap: 8px;
     }
 
+    .version-toggle,
     .language-toggle,
     .theme-toggle {
       display: inline-flex;
@@ -115,11 +122,14 @@
       cursor: pointer;
     }
 
+    .version-toggle { grid-area: version; white-space: nowrap; }
     .theme-toggle { width: 44px; min-width: 44px; padding: 0; }
     .theme-toggle svg { display: block; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .theme-toggle svg[hidden],
+    .version-toggle[hidden],
     .language-toggle[hidden],
     .theme-toggle[hidden] { display: none; }
+    .version-toggle:hover,
     .language-toggle:hover,
     .theme-toggle:hover { color: var(--background); background: var(--foreground); }
 
@@ -354,14 +364,28 @@
       line-height: 1.5;
     }
 
+    .ai-project-list {
+      display: grid;
+      gap: 36px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ai-project-list h3 { margin: 0 0 8px; font-size: 1rem; font-weight: 500; }
+    .ai-project-list p { margin: 0; line-height: 1.85; }
+    .ai-project-status { display: block; margin-bottom: 8px; font-size: .82rem; }
+
     @media (max-width: 640px) {
       .site-header {
-        grid-template-columns: 1fr auto;
-        grid-template-areas: "name actions" "navigation navigation";
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas: "name actions" "navigation version";
+        gap: 4px 8px;
         padding-top: 12px;
         padding-bottom: 8px;
       }
-      .site-nav { justify-self: start; }
+      .site-nav { justify-self: start; gap: clamp(12px, 3.5vw, 24px); }
+      .version-toggle { justify-self: end; }
       main { padding-top: 40px; padding-bottom: 64px; }
       section { scroll-margin-top: 128px; }
       .section { margin-top: 56px; }
@@ -372,11 +396,17 @@
 <body>
   <header class="site-header">
     <a class="site-name" href="#about" data-zh="韩昊辰">Haochen Han</a>
-    <nav class="site-nav" aria-label="Main navigation" data-zh-label="主导航">
+    <nav class="site-nav game-nav" aria-label="Main navigation" data-zh-label="主导航">
       <a href="#about" data-zh="关于">about</a>
       <a href="#games" data-zh="游戏">games</a>
       <a href="#projects" data-zh="项目">projects</a>
     </nav>
+    <nav class="site-nav ai-nav" aria-label="AI navigation" data-zh-label="AI 导航">
+      <a href="#ai-about" data-zh="关于">about</a>
+      <a href="#ai-projects" data-zh="项目">projects</a>
+      <a href="#ai-notes" data-zh="笔记">notes</a>
+    </nav>
+    <button class="version-toggle" type="button" aria-label="Switch to AI version" title="Switch to AI version" hidden>AI ver</button>
     <div class="header-actions">
       <button class="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-CN" hidden>中文</button>
       <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false" hidden>
@@ -385,7 +415,7 @@
       </button>
     </div>
   </header>
-  <main>
+  <main class="game-main">
     <section id="about" class="about">
       <div class="identity">
         <h1 data-zh="韩昊辰">Haochen Han</h1>
@@ -485,9 +515,61 @@
       <p data-zh="敬请期待。">Coming soon.</p>
     </section>
   </main>
+  <main class="ai-main">
+    <section id="ai-about" class="about">
+      <div class="identity">
+        <h1 data-zh="韩昊辰">Haochen Han</h1>
+        <p class="handle" data-zh="@Osphey · AI 版">@Osphey · AI ver</p>
+        <nav class="links" aria-label="Profile links" data-zh-label="个人链接">
+          <a class="link" href="https://x.com/Ospheyy" target="_blank" rel="noopener noreferrer" aria-label="X" title="X">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 4l11.733 16h4.267L8.267 4z" />
+              <path d="M4 20l6.768-6.768m2.46-2.46L20 4" />
+            </svg>
+          </a>
+          <a class="link" href="https://github.com/osphey" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+            </svg>
+          </a>
+        </nav>
+      </div>
+      <p class="intro" data-zh="我正在探索 AI 如何让创作更有趣、工具更好用。这里会慢慢收集相关的实验、项目和笔记。">I'm exploring how AI can make creative work more playful and useful. This page will gradually collect experiments, projects, and notes from that exploration.</p>
+      <div class="education">
+        <h2 data-zh="关注方向">areas of interest</h2>
+        <p data-zh="创意工具 · 互动体验 · 轻量工作流">Creative tools · interactive experiences · lightweight workflows</p>
+      </div>
+    </section>
+    <section id="ai-projects" class="section">
+      <h2 data-zh="项目">projects</h2>
+      <ul class="ai-project-list">
+        <li>
+          <span class="ai-project-status" data-zh="01 · 即将更新">01 · coming soon</span>
+          <h3 data-zh="创意工具">Creative tools</h3>
+          <p data-zh="为未来的 AI 辅助创作工具和小型实用程序预留的位置。">A space for future AI-assisted creative tools and small utilities.</p>
+        </li>
+        <li>
+          <span class="ai-project-status" data-zh="02 · 即将更新">02 · coming soon</span>
+          <h3 data-zh="互动实验">Interactive experiments</h3>
+          <p data-zh="为未来结合 AI 与可玩交互的原型预留的位置。">A space for future prototypes that bring AI into playful interactions.</p>
+        </li>
+      </ul>
+    </section>
+    <section id="ai-notes" class="section">
+      <h2 data-zh="笔记">notes</h2>
+      <p data-zh="以后会在这里记录制作过程中的想法、发现和有用的链接。">Ideas, discoveries, and useful links from the making process will appear here.</p>
+    </section>
+  </main>
   <script>
     (() => {
       const toggle = document.querySelector('.language-toggle');
+      const versionToggle = document.querySelector('.version-toggle');
+      const siteName = document.querySelector('.site-name');
+      const description = document.querySelector('meta[name="description"]');
+      const descriptions = {
+        games: { en: description.getAttribute('content'), zh: description.dataset.zhContent },
+        ai: { en: description.dataset.aiContent, zh: description.dataset.zhAiContent }
+      };
       const themeToggle = document.querySelector('.theme-toggle');
       const moonIcon = themeToggle.querySelector('.moon-icon');
       const sunIcon = themeToggle.querySelector('.sun-icon');
@@ -513,6 +595,28 @@
 
       let language = 'en';
       let theme = document.documentElement.dataset.theme;
+      let version = document.documentElement.dataset.version;
+
+      function updateVersionToggle() {
+        const toAi = version !== 'ai';
+        versionToggle.textContent = language === 'zh'
+          ? (toAi ? 'AI 版' : '游戏版')
+          : (toAi ? 'AI ver' : 'games');
+        const label = language === 'zh'
+          ? (toAi ? '切换至 AI 版' : '切换至游戏版')
+          : (toAi ? 'Switch to AI version' : 'Switch to games version');
+        versionToggle.setAttribute('aria-label', label);
+        versionToggle.title = label;
+        document.title = (language === 'zh' ? '韩昊辰 · Osphey' : 'Haochen Han') + (toAi ? '' : ' · AI');
+        description.setAttribute('content', descriptions[version][language]);
+      }
+
+      function setVersion(next) {
+        version = next === 'ai' ? 'ai' : 'games';
+        document.documentElement.dataset.version = version;
+        siteName.setAttribute('href', version === 'ai' ? '#ai-about' : '#about');
+        updateVersionToggle();
+      }
 
       function updateThemeToggle() {
         const label = language === 'zh'
@@ -540,6 +644,7 @@
         toggle.lang = language === 'zh' ? 'en' : 'zh-CN';
         toggle.setAttribute('aria-label', language === 'zh' ? '切换至英文' : 'Switch to Chinese');
         updateThemeToggle();
+        updateVersionToggle();
       }
 
       // Storage may be unavailable in private browsing; switching still works.
@@ -549,8 +654,10 @@
 
       setLanguage(language);
       setTheme(theme);
+      setVersion(version);
       toggle.hidden = false;
       themeToggle.hidden = false;
+      versionToggle.hidden = false;
       toggle.addEventListener('click', () => {
         setLanguage(language === 'en' ? 'zh' : 'en');
         try { localStorage.setItem(storageKey, language); } catch {}
@@ -558,6 +665,18 @@
       themeToggle.addEventListener('click', () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
         try { localStorage.setItem(themeStorageKey, theme); } catch {}
+      });
+      versionToggle.addEventListener('click', () => {
+        setVersion(version === 'ai' ? 'games' : 'ai');
+        const url = new URL(location.href);
+        if (version === 'ai') url.searchParams.set('view', 'ai');
+        else url.searchParams.delete('view');
+        url.hash = '';
+        history.pushState(null, '', url);
+        window.scrollTo(0, 0);
+      });
+      window.addEventListener('popstate', () => {
+        setVersion(new URLSearchParams(location.search).get('view') === 'ai' ? 'ai' : 'games');
       });
     })();
   </script>
