@@ -14,7 +14,8 @@
       line-height: 1.65;
       background: #fff;
       color: #000;
-      --page-gutter: clamp(28px, 10vw, 240px);
+      --content-width: 720px;
+      --page-gutter: clamp(24px, 5vw, 48px);
     }
 
     * { box-sizing: border-box; }
@@ -26,14 +27,17 @@
       background: #fff;
     }
 
+    main,
+    .site-header {
+      width: min(var(--content-width), calc(100% - 2 * var(--page-gutter)));
+      margin-inline: auto;
+    }
+
     main {
-      width: 100%;
-      margin: 0;
-      padding: clamp(48px, 5.5vw, 88px) var(--page-gutter) 88px;
+      padding: clamp(48px, 5.5vw, 88px) 0 88px;
     }
 
     .site-header {
-      margin-inline: var(--page-gutter);
       padding: 16px 0 12px;
       display: grid;
       grid-template-columns: 1fr auto auto;
@@ -117,9 +121,9 @@
 
     .about {
       display: grid;
-      grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr) minmax(0, 1fr);
-      grid-template-areas: "identity introduction education";
-      gap: 40px clamp(36px, 4.5vw, 88px);
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "identity" "introduction" "education";
+      gap: 32px;
       align-items: start;
     }
 
@@ -297,21 +301,6 @@
       margin-top: auto;
       font-size: .82rem;
       line-height: 1.5;
-    }
-
-    @media (max-width: 1100px) {
-      .about {
-        grid-template-columns: minmax(230px, .85fr) minmax(0, 1.15fr);
-        grid-template-areas: "identity introduction" "identity education";
-        row-gap: 36px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .about {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "identity" "introduction" "education";
-      }
     }
 
     @media (max-width: 640px) {
