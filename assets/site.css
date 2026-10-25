@@ -173,7 +173,7 @@ main {
   text-decoration: underline;
 }
 
-/* About: original portrait on the left and profile on the right */
+/* About: a quiet illustration placeholder on the left and profile on the right */
 .about {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
@@ -185,11 +185,22 @@ main {
   margin: 0;
 }
 
-.portrait img {
-  display: block;
-  width: 100%;
-  height: auto;
+.portrait-placeholder {
+  display: grid;
+  place-items: center;
   aspect-ratio: 7 / 10;
+  background: color-mix(in srgb, var(--foreground) 3%, var(--background));
+  color: var(--muted);
+}
+
+.portrait-placeholder svg {
+  display: block;
+  width: 60%;
+  max-width: 220px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .profile {
