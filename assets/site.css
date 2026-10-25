@@ -1,0 +1,574 @@
+/* Theme and shared page frame */
+:root {
+  color-scheme: light;
+  font-family: Arial, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  --background: #fff;
+  --foreground: #222;
+  --muted: #707070;
+  --border: #e7e7e7;
+  --content-width: 1200px;
+  --page-gutter: clamp(24px, 6vw, 80px);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #151515;
+  --foreground: #f1f1f1;
+  --muted: #aaa;
+  --border: #363636;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  overflow-wrap: anywhere;
+  background: var(--background);
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 5px;
+}
+
+main,
+.site-header,
+.site-footer {
+  width: min(var(--content-width), calc(100% - 2 * var(--page-gutter)));
+  margin-inline: auto;
+}
+
+main {
+  flex: 1;
+  padding-top: clamp(64px, 7vw, 104px);
+}
+
+:root[data-version="ai"] [data-profile="games"],
+:root:not([data-version="ai"]) [data-profile="ai"] {
+  display: none;
+}
+
+/* Open header with text navigation and quiet controls */
+.site-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "name navigation actions";
+  align-items: center;
+  gap: 28px;
+  padding-top: 32px;
+}
+
+.site-name {
+  grid-area: name;
+  justify-self: start;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav {
+  grid-area: navigation;
+  justify-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.site-name:hover,
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--foreground);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--foreground);
+  text-decoration: underline;
+}
+
+.header-actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-toggle,
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 0;
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.theme-toggle {
+  padding: 0;
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle svg[hidden],
+.profile-switcher[hidden],
+.language-toggle[hidden],
+.theme-toggle[hidden] {
+  display: none;
+}
+
+.language-toggle:hover,
+.theme-toggle:hover,
+.site-footer a:hover {
+  color: var(--foreground);
+}
+
+.site-nav a:hover,
+.language-toggle:hover,
+.game-title:hover {
+  text-decoration: underline;
+}
+
+/* About: original portrait on the left and profile on the right */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: start;
+  gap: 56px;
+}
+
+.portrait {
+  margin: 0;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 7 / 10;
+}
+
+.profile {
+  min-width: 0;
+}
+
+.profile-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 20px 0 24px;
+}
+
+.profile-switcher button {
+  min-height: 44px;
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.profile-switcher button[aria-pressed="true"] {
+  border-bottom-color: currentColor;
+  color: var(--foreground);
+}
+
+.profile-switcher button:hover {
+  color: var(--foreground);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(32px, 3.4vw, 48px);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+}
+
+.handle {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.intro {
+  max-width: 60ch;
+  margin: 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.75;
+}
+
+.education {
+  margin-top: 32px;
+  font-size: 14px;
+}
+
+.education h2 {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.education p {
+  margin: 0;
+}
+
+.education-school,
+.education-details {
+  display: block;
+}
+
+.education-details {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+:lang(zh-CN) h1 {
+  letter-spacing: .04em;
+}
+
+:lang(zh-CN) .intro {
+  line-height: 1.9;
+}
+
+/* Social links remain plain, with no animation or hover-dependent content */
+.links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+  margin-left: -10px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--foreground);
+}
+
+.link svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Preserve the official itch.io logo's filled silhouette and proportions. */
+.link .icon-itch {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Large two-column work grid; captions are always visible */
+.page-heading {
+  margin-bottom: 40px;
+}
+
+.page-kicker {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.empty-copy {
+  margin: 0;
+  color: var(--muted);
+}
+
+section {
+  scroll-margin-top: 32px;
+}
+
+.section {
+  margin-top: clamp(80px, 8vw, 120px);
+}
+
+.section h2 {
+  margin: 0 0 28px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.section > p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 22px;
+}
+
+.game-image {
+  display: block;
+  line-height: 0;
+}
+
+.game-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 315 / 250;
+  object-fit: cover;
+}
+
+.game-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.game h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.game-title {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.external-mark {
+  display: inline-block;
+  margin-left: .25em;
+  color: var(--muted);
+  font-size: .8em;
+}
+
+.game-description {
+  max-width: 58ch;
+  margin: 10px 0 16px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.game-meta {
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* AI profile uses the same spacing and column rhythm */
+.ai-project-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px 56px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-project-list h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.ai-project-list p {
+  max-width: 50ch;
+  margin: 0;
+  line-height: 1.8;
+}
+
+.ai-project-status {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* A small signature closes both profiles */
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 104px;
+  padding: 32px 0 40px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.site-footer a {
+  text-decoration: none;
+}
+
+/* Tablet: retain the split profile while giving navigation its own row */
+@media (max-width: 900px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name actions" "navigation navigation";
+    gap: 4px 20px;
+    padding-top: 24px;
+  }
+
+  .site-nav {
+    justify-self: start;
+  }
+
+  .about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    column-gap: 32px;
+  }
+
+  .game-list {
+    column-gap: 24px;
+  }
+}
+
+/* Portrait and biography stack before the navigation becomes cramped */
+@media (max-width: 760px) {
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .portrait {
+    width: min(100%, 360px);
+  }
+}
+
+/* Phone: all content remains in its own page with a single reading column */
+@media (max-width: 640px) {
+  main {
+    padding-top: 48px;
+  }
+
+  .site-name {
+    font-size: 16px;
+    letter-spacing: .05em;
+  }
+
+  .site-nav {
+    gap: 20px;
+    font-size: 14px;
+  }
+
+  .header-actions {
+    gap: 0;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .intro {
+    font-size: 18px;
+  }
+
+  .links {
+    margin-top: 16px;
+  }
+
+  .section {
+    margin-top: 64px;
+  }
+
+  .section h2 {
+    margin-bottom: 24px;
+  }
+
+  .game-list,
+  .ai-project-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+
+  .game {
+    gap: 18px;
+  }
+
+  .game h2 {
+    font-size: 17px;
+  }
+
+  .site-footer {
+    margin-top: 72px;
+    padding-bottom: 32px;
+  }
+}
